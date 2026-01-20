@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" >
+
+<head>
+	<title>Space Invaders</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<style type="text/css" media="all">
+		@import "css/main.css";
+	</style>
+</head>
+
+<body>
+	<div id="splash">
+		<div id="loadingMessage">
+			<p>You must turn JavaScript on in order for this game to work</p>
+			<div>
+				<div>
+				</div>
+			</div>
+		</div> <!-- END #loadingMessage -->
+		<button id="btnStartGame"    style="display: none; margin: 0px; position: absolute; left: 250px; top: 530px; width: 100px;" onclick="ready();">Start&nbsp;Game</button>
+		<button id="btnInstructions" style="display: none; margin: 0px; position: absolute; left: 550px; top: 530px; width: 100px;" onclick="showInstructions();">Instructions</button>
+	</div>
+	<div id="instructions">
+		<button style="margin: 0px; position: absolute; left: 400px; top: 530px; width: 100px;" onclick="hideInstructions();">Close</button>
+	</div>
+	<div id="gameover">
+	</div>
+	<div id="stage">
+		<div id="scores">
+			<div id="score1"></div>
+			<div id="highScore"></div>
+			<div id="score2"></div>
+		</div>
+		<div id="status">
+			<div id="shipCount"></div>
+			<div id="shipCountDisplay">
+				<img id="sd1" src="images/si_cannon2.png" width="37" height="25" style="visibility: hidden;" alt="ship count 1">
+				<img id="sd2" src="images/si_cannon2.png" width="37" height="25" style="visibility: hidden;" alt="ship count 2">
+				<img id="sd3" src="images/si_cannon2.png" width="37" height="25" style="visibility: hidden;" alt="ship count 3">
+				<img id="sd4" src="images/si_cannon2.png" width="37" height="25" style="visibility: hidden;" alt="ship count 4">
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="scripts/howler.min.js"></script>
+	<script type="text/javascript" src="scripts/preload.js"></script>
+	<script type="text/javascript" src="scripts/spaceinvader_howler.js"></script>
+
+</body>
+</html>

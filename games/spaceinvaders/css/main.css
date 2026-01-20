@@ -1,0 +1,427 @@
+body
+{
+	background-color: #767676;
+	overflow:hidden;
+}
+
+#stage
+{
+	background-color: black;
+	border: 0px;
+	cursor: crosshair;
+	display: none;
+	height: 675px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 5;
+}
+
+#scores
+{
+	background-color: black;
+	border: 0px;
+	color: white;
+	font: bold 25px/25px monospace;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 75;
+}
+
+#score1
+{
+	border: 0px;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 76;
+}
+
+#score2
+{
+	border: 0px;
+	height: 25px;
+	left: 600px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 76;
+}
+
+#highScore
+{
+	border: 0px;
+	height: 25px;
+	left: 300px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 76;
+}
+
+#status
+{
+	background-color: black;
+	border: 0px;
+	border-top: 1px solid green;
+	color: white;
+	font: bold 25px/30px monospace;
+	height: 30px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 645px;
+	width: 900px;
+	z-index: 75;
+}
+
+#shipCountDisplay
+{
+	background-color: black;
+	border: 0px;
+	height: 30px;
+	left: 50px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 850px;
+	top: 3px;
+	vertical-align:middle;
+}
+
+#shipCount
+{
+	background-color: black;
+	border: 0px;
+	height: 30px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 40px;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+}
+
+#splash
+{
+	background-image: url("../images/logo.jpg");
+	display: block;
+	height: 600px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 35px;
+	width: 900px;
+	z-index: 80;
+}
+
+#instructions
+{
+	background-image: url("../images/instructions.jpg");
+	display: none;
+	height: 600px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 35px;
+	width: 900px;
+	z-index: 80;
+}
+
+#gameover
+{
+	background-image: url("../images/gameover.jpg");
+	display: none;
+	height: 300px;
+	left: 200px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 185px;
+	width: 500px;
+	z-index: 90;
+}
+
+.ready#splash
+{
+	display: none;
+}
+
+.ready#stage
+{
+	display: block;
+}
+
+#loadingMessage
+{
+	left: 100px;
+	position: absolute;
+	text-align: center;
+	color: green;
+	top: 465px;
+}
+
+#loadingMessage p
+{
+	text-align: left;
+	font: normal 12px/12px monospace;
+}
+
+#loadingMessage div
+{
+	background-color: rgb(0,0,0);
+	border: 1px solid rgb(64,255,64);
+	height: 10px;
+	margin-top: 7px;
+	overflow: hidden;
+	text-align: left;
+	width: 700px;
+}
+
+#loadingMessage div div
+{
+	background-color: rgb(0, 64, 0);
+	float: none;
+	height: 10px;
+	margin-top: 0px;
+	overflow: hidden;
+	width: 0px;
+	border: 0px solid black;
+}
+
+.ab00
+{
+	background:url(../images/si_bombs.png) -0px 0px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab01
+{
+	background:url(../images/si_bombs.png) -6px 0px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab02
+{
+	background:url(../images/si_bombs.png) -12px 0px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+
+.ab10
+{
+	background:url(../images/si_bombs.png) 0px -14px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab11
+{
+	background:url(../images/si_bombs.png) -6px -14px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab12
+{
+	background:url(../images/si_bombs.png) -12px -14px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab20
+{
+	background:url(../images/si_bombs.png) -0px -28px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab21
+{
+	background:url(../images/si_bombs.png) -6px -28px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab22
+{
+	background:url(../images/si_bombs.png) -12px -28px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab30
+{
+	background:url(../images/si_bombs.png) -0px -42px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab31
+{
+	background:url(../images/si_bombs.png) -6px -42px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab32
+{
+	background:url(../images/si_bombs.png) -12px -42px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab40
+{
+	background:url(../images/si_bombs.png) -0px -56px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: relative;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab41
+{
+	background:url(../images/si_bombs.png) -6px -56px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: relative;
+	width: 6px;
+	z-index: 15;
+}
+
+.ab42
+{
+	background:url(../images/si_bombs.png) -12px -56px no-repeat scroll;
+	border: 0px;
+	height: 14px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: relative;
+	width: 6px;
+	z-index: 15;
+}

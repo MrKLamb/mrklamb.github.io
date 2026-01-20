@@ -1,0 +1,250 @@
+body
+{
+	background-color: #767676;
+	overflow:hidden;
+}
+
+#splash
+{
+	background-image: url("../images/logo.jpg");
+	display: block;
+	height: 700px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0px;
+	width: 560px;
+	z-index: 80;
+}
+
+#loadingMessage
+{
+	color: black;
+	left: 50px;
+	position: absolute;
+	text-align: center;
+	top: 600px;
+}
+
+#loadingMessage p
+{
+	font: bold 12px/12px monospace;
+	text-align: left;
+}
+
+#loadingMessage div
+{
+	background-color: black;
+	border: 1px solid white;
+	height: 10px;
+	margin-top: 7px;
+	overflow: hidden;
+	text-align: left;
+	width: 460px;
+}
+
+#loadingMessage div div
+{
+	background-color: yellow;
+	background-image: url("../images/progressbar.png");
+	border: 0px solid black;
+	float: none;
+	height: 10px;
+	margin-top: 0px;
+	overflow: hidden;
+	width: 0%;
+}
+
+#mazeArea
+{
+	border: 0px;
+	display: block;
+	height: 600px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: relative;
+	top: 25px;
+	width: 1080px;
+	z-index: -1;
+}
+
+#stage
+{
+	background-color: black;
+	border: 0px;
+	cursor: crosshair;
+	display: none;
+	font: normal 8px/8px monospace;
+	height: 700px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 560px;
+	z-index: 50;
+}
+
+#scores
+{
+	background-color: black;
+	border: 0px;
+	color: white;
+	display: block;
+	font: bold 25px/25px monospace;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 10;
+}
+
+#score1
+{
+	border: 0px;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 175px;
+	z-index: 11;
+}
+
+#score2
+{
+	border: 0px;
+	height: 25px;
+	left: 400px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 175px;
+	z-index: 11;
+}
+
+#highScore
+{
+	border: 0px;
+	color: yellow;
+	height: 25px;
+	left: 200px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 175px;
+	z-index: 11;
+}
+
+#status
+{
+	background-color: black;
+	border-top: 1px solid green;
+	border: 0px;
+	color: white;
+	display: block;
+	font: bold 25px/30px monospace;
+	height: 75px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 625px;
+	width: 900px;
+	z-index: 75;
+}
+
+#goodieDisplay
+{
+	background-color: black;
+	border: 0px;
+	height: 35px;
+	left: 315px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 5px;
+	vertical-align:middle;
+	width: 260px;
+}
+
+#livesCountDisplay
+{
+	background-color: black;
+	border: 0px;
+	height: 35px;
+	left: 30px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 40px;
+	vertical-align:middle;
+	width: 250px;
+}
+
+#livesCount
+{
+	background-color: black;
+	border: 0px;
+	height: 35px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 40px;
+	width: 30px;
+}
+
+#instructions
+{
+	background-image: url("../images/instructions.jpg");
+	display: none;
+	height: 700px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0px;
+	width: 560px;
+	z-index: 80;
+}
+
+.ready#splash
+{
+	display: none;
+}
+
+.ready#stage
+{
+	display: block;
+}
+

@@ -1,0 +1,298 @@
+body
+{
+	background-color: #767676;
+	overflow:hidden;
+}
+
+#splash
+{
+	background-image: url("../images/logo.jpg");
+	display: block;
+	height: 500px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0px;
+	width: 900px;
+	z-index: 80;
+}
+
+#loadingMessage
+{
+	left: 200px;
+	position: absolute;
+	text-align: center;
+	color: yellow;
+	top: 420px;
+}
+
+#loadingMessage p
+{
+	text-align: left;
+	font: normal 12px/12px monospace;
+}
+
+#loadingMessage div
+{
+	background-color: rgb(0,0,0);
+	border: 1px solid rgb(255,0,0);
+	height: 10px;
+	margin-top: 7px;
+	overflow: hidden;
+	text-align: left;
+	width: 500px;
+}
+
+#loadingMessage div div
+{
+	background-image: url("../images/progressbar.png");
+	background-color: rgb(64, 0, 0);
+	float: none;
+	height: 10px;
+	margin-top: 0px;
+	overflow: hidden;
+	width: 0%;
+	border: 0px solid black;
+}
+
+#backgrounds
+{
+	border: 0px;
+	cursor: crosshair;
+	display: block;
+	height: 675px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 5;
+}
+
+#stage
+{
+	border: 0px;
+	cursor: crosshair;
+	display: none;
+	height: 675px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 10;
+}
+
+.bgi0
+{
+	background-image: url("../images/Background_Elephant.png");
+}
+
+.bgi1
+{
+	background-image: url("../images/Background_Bear.png");
+}
+
+.bgi2
+{
+	background-image: url("../images/Background_Seal.png");
+}
+
+.bgi3
+{
+	background-image: url("../images/Background_Trapeze.png");
+}
+
+.bgi4
+{
+	background-image: url("../images/Background_Tiger.png");
+}
+
+#scores
+{
+	display: block;
+	background-color: black;
+	border: 0px;
+	color: white;
+	font: bold 25px/25px monospace;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	width: 900px;
+	z-index: 10;
+}
+
+#score1
+{
+	border: 0px;
+	height: 25px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 11;
+}
+
+#score2
+{
+	border: 0px;
+	height: 25px;
+	left: 600px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 11;
+}
+
+#highScore
+{
+	border: 0px;
+	height: 25px;
+	left: 300px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+	width: 300px;
+	z-index: 11;
+}
+
+#status
+{
+	background-color: black;
+	border: 0px;
+	border-top: 1px solid green;
+	color: white;
+	font: bold 25px/30px monospace;
+	height: 30px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	top: 645px;
+	width: 900px;
+	z-index: 75;
+}
+
+#clownCountDisplay
+{
+	background-color: black;
+	border: 0px;
+	height: 30px;
+	left: 50px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 850px;
+	top: 3px;
+	vertical-align:middle;
+}
+
+#clownCount
+{
+	background-color: black;
+	border: 0px;
+	height: 30px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 40px;
+	text-align:center;
+	top: 0px;
+	vertical-align:middle;
+}
+
+#instructions
+{
+	background-image: url("../images/instructions.jpg");
+	display: none;
+	height: 600px;
+	left: 0px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0px;
+	width: 900px;
+	z-index: 80;
+}
+
+#gameover
+{
+	background-image: url("../images/gameover.jpg");
+	display: none;
+	height: 450px;
+	left: 170px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 110px;
+	width: 560px;
+	z-index: 90;
+}
+
+#newlevel
+{
+	background-image: url("../images/newlevel.jpg");
+	display: none;
+	height: 450px;
+	left: 170px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	text-align: center;
+	top: 110px;
+	width: 560px;
+	z-index: 90;
+}
+
+#newlevel p
+{
+	margin: 310px 0px;
+	color: yellow;
+	text-align: center;
+	font: bold 90px/90px arial;	
+}
+
+.ready#splash
+{
+	display: none;
+}
+
+.ready#stage
+{
+	display: block;
+}
+
