@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" >
+<head>
+	<title>Pac Man Jr.</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=560, initial-scale=1" />
+	<style type="text/css" media="all">
+		@import "css/main.css";
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="splash">
+		<div id="loadingMessage">
+			<p>You must turn JavaScript on in order for this game to work</p>
+			<div>
+				<div>
+				</div>
+			</div>
+		</div> <!-- END #loadingMessage -->
+		<button id="btnStartGame"    style="background-color: black; color: yellow; display: none; margin: 0px; position: absolute; left: 100px; top: 650px; width: 100px;" onclick="ready();">Start&nbsp;Game</button>
+		<button id="btnInstructions" style="background-color: black; color: yellow; display: none; margin: 0px; position: absolute; left: 360px; top: 650px; width: 100px;" onclick="showInstructions();">Instructions</button>
+	</div>
+	<div id="instructions">
+		<button style="margin: 0px; position: absolute; left: 230px; top: 650px; width: 100px;" onclick="hideInstructions();">Close</button>
+	</div>
+	<div id="gameover">
+	</div>
+	<div id="stage">
+		<div id="scores">
+			<div id="score1"></div>
+			<div id="highScore"></div>
+			<div id="score2"></div>
+		</div>
+		<div id="mazeArea">
+		</div>
+		<div id="status">
+			<div id="goodieDisplay">
+				<img id="gc7" src="images/goodie06.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 7">
+				<img id="gc6" src="images/goodie05.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 6">
+				<img id="gc5" src="images/goodie04.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 5">
+				<img id="gc4" src="images/goodie03.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 4">
+				<img id="gc3" src="images/goodie02.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 3">
+				<img id="gc2" src="images/goodie01.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 2">
+				<img id="gc1" src="images/goodie00.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border: 0px; display: inline; float: left;" alt="goodie 1">
+			</div>
+			<div id="livesCount"></div>
+			<div id="livesCountDisplay">
+				<img id="lc1" src="images/pr5.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border 0px; display: inline; float: left;" alt="life count 1">
+				<img id="lc2" src="images/pr5.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border 0px; display: inline; float: left;" alt="life count 2">
+				<img id="lc3" src="images/pr5.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border 0px; display: inline; float: left;" alt="life count 3">
+				<img id="lc4" src="images/pr5.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border 0px; display: inline; float: left;" alt="life count 4">
+				<img id="lc5" src="images/pr5.png" width="30" height="30" style="visibility: hidden; padding: 2px; margin: 0px; border 0px; display: inline; float: left;" alt="life count 5">
+			</div>
+		</div>
+	</div>
+</div>
+	<script type="text/javascript" src="scripts/howler.min.js"></script>
+	<script type="text/javascript" src="scripts/preload.js"></script>
+	<script type="text/javascript" src="scripts/pacmanjr_howler.js"></script>
+</body>
+</html>

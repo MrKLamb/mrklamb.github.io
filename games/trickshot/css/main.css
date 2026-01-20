@@ -1,0 +1,154 @@
+body
+{
+	background-color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 80%;
+	line-height: 1.4;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	text-align: center;
+	text-color: #FFF;
+}
+#stage
+{
+	cursor: pointer;
+	display: block;
+	display: none;
+	height: 640px;
+	margin: 0px;
+	overflow: hidden;
+	position: relative;
+	text-align: left;
+	width: 1152px;
+}
+#scard
+{
+	-moz-border-radius: 15px;
+	background-color: #CCCCCC;
+	border-radius: 15px;
+	cursor: pointer;
+	display: none;
+	height: 300px;
+	margin: 150px 64px;
+	overflow: hidden;
+	position: absolute;
+	text-align: left;
+	text-color: #0000FF;
+	width: 1000px;
+	z-index: 30;
+}
+#scard table,th,td
+{
+	align: center;
+	border: 1px solid black;
+}
+#scorecard
+{
+	margin: 50px 50px 20px 50px;
+}
+#scorecard td, #scorecard th
+{
+	border:1px solid #98bf21;
+	font-size:1em;
+	padding:3px 7px 2px 7px;
+	text-align:center;
+	width: 30px;
+}
+#scorecard th
+{
+	background-color:#A7C942;
+	color:#ffffff;
+	font-size:1.1em;
+	padding-bottom:4px;
+	padding-top:5px;
+	text-align:center;
+}
+#scorecard tr.alt td
+{
+	background-color:#EAF2D3;
+	color:#000000;
+	text-align:center;
+}
+#scorecard tr.alt td.birdie
+{
+	background-color:rgb(153,216,231);
+}
+#scorecard tr.alt td.bogey
+{
+	background-color:rgb(246,181,77);
+}
+#scorecard tr.alt td.dbl_bogey
+{
+	background-color:rgb(245, 89, 4);
+}
+#scorecard tr.alt td.eagle
+{
+	background-color:rgb(28,99,151);
+}
+#splash
+{
+	background-image: url("../images/TrickShot.png");
+	height: 640px;
+	margin: 0px 64px;
+	overflow: hidden;
+	position: relative;
+	text-align: left;
+	width: 1024px;
+}
+.ready#splash
+{
+	display: none;
+}
+.ready#stage
+{
+	display: block;
+}
+#instructions
+{
+	-moz-border-radius: 15px;
+	background-color: #CCCCCC;
+	border-radius: 15px;
+	cursor: pointer;
+	display: none;
+	height: 150px;
+	margin: 200px 200px;
+	overflow: hidden;
+	padding: 30px 100px;
+	position: absolute;
+	text-align: left;
+	text-color: #0000FF;
+	width: 700px;
+	z-index: 30;
+}
+#loadingMessage
+{
+	left: 160px;
+	position: absolute;
+	text-align: center;
+	top: 430px;
+}
+#loadingMessage p
+{
+	text-align: left;
+}
+#loadingMessage div
+{
+	background-color: rgb(127, 127, 127);
+	border: 1px solid black;
+	height: 20px;
+	margin-top: 7px;
+	overflow: hidden;
+	text-align: left;
+	width: 700px;
+}
+#loadingMessage div div
+{
+	background-color: rgb(255, 0, 0);
+	float: none;
+	height: 20px;
+	margin-top: 0px;
+	overflow: hidden;
+	width: 0px;
+	border: 0px solid black;
+}

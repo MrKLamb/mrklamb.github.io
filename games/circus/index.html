@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" >
+
+<head>
+	<title>Circus</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html">
+<!--	<meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+
+	<style type="text/css" media="all">
+		@import "css/main.css";
+	</style>
+</head>
+
+<body>
+	<div id="backgrounds">
+	</div>
+	<div id="splash">
+		<div id="loadingMessage">
+			<p>You must turn JavaScript on in order for this game to work</p>
+			<div>
+				<div>
+				</div>
+			</div>
+		</div> <!-- END #loadingMessage -->
+		<button id="btnStartGame"    style="background-color: black; color: yellow; display: none; margin: 0px; position: absolute; left: 275px; top: 385px; width: 100px;" onclick="ready();">Start&nbsp;Game</button>
+		<button id="btnInstructions" style="background-color: black; color: yellow; display: none; margin: 0px; position: absolute; left: 525px; top: 385px; width: 100px;" onclick="showInstructions();">Instructions</button>
+	</div>
+	<div id="instructions">
+		<button style="margin: 0px; position: absolute; left: 400px; top: 560px; width: 100px;" onclick="hideInstructions();">Close</button>
+	</div>
+	<div id="gameover">
+	</div>
+	<div id="stage">
+		<div id="newlevel">
+			<p id="levelNumber">1</p>
+		</div>
+		<div id="scores">
+			<div id="score1"></div>
+			<div id="highScore"></div>
+			<div id="score2"></div>
+		</div>
+
+		<div id="status">
+			<div id="clownCount"></div>
+			<div id="clownCountDisplay">
+				<img id="cd1" src="images/clown1_5.png" width="19" height="25" style="visibility: hidden;" alt="clown counter 1">
+				<img id="cd2" src="images/clown1_6.png" width="19" height="25" style="visibility: hidden;" alt="clown counter 2">
+				<img id="cd3" src="images/clown1_4.png" width="19" height="25" style="visibility: hidden;" alt="clown counter 3">
+				<img id="cd4" src="images/clown1_3.png" width="19" height="25" style="visibility: hidden;" alt="clown counter 4">
+				<img id="cd5" src="images/clown1_1.png" width="19" height="25" style="visibility: hidden;" alt="clown counter 5">
+			</div>
+		</div>
+	</div>
+	<div id="sm2-container"></div>
+
+	<script type="text/javascript" src="scripts/howler.min.js"></script>
+	<script type="text/javascript" src="scripts/preload.js"></script>
+	<script type="text/javascript" src="scripts/circus_howler.js"></script>
+
+</body>
+</html>
