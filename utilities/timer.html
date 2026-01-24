@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Timer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: white;
+}
+p {
+	text-align: center;
+	font-size: 25px;
+	margin: 5px;
+	color: black;
+}
+#color-bar {
+	width:100%
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	border: 1px solid black;
+	background-image: linear-gradient(to right, lightgreen 75%, lightyellow 75% 87%, pink 87% 100%);
+}
+#vert-bar {
+	border-left: 3px solid black;
+	width: 3px;
+	min-width: 3px;
+	max-width: 3px;
+	height: 40px;
+	position: relative;
+	left: 0%;
+	//margin-left: -3px;
+	top: 0;
+}
+.form {
+	height: 30px;
+	min-height: 30px;
+	max-height: 30px;
+	border: 1px solid black;
+	background-color: #E5E4E2;
+	//margin-top: 10px;
+	padding: 2px;
+	text-align: center;
+	font-size: 16px;
+	position: relative;
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+</style>
+</head>
+<body>
+<p id="time-display">00:00:00</p>
+<div id="color-bar">
+	<div id="vert-bar"></div>
+</div>
+<div class="form">
+<div class="vertical-center">
+	<button onclick="resetTimer()">&nbsp;Start&nbsp;</button>
+	<label for="length">Length:</label>
+	<select id="length">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8" selected>8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+
+	</select>
+	<label for="warn">Warn (Yellow):</label>
+	<select id="warn">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6" selected>6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+
+	</select>
+	<label for="alert">Alert (Red):</label>
+	<select id="alert">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7" selected>7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+	</select>
+</div>
+</div>
+<script>
+// Set timer initial values - will be overridden when timer is reset
+var timerActivated = new Date().getTime();
+var timerTarget = new Date().getTime();
+var timerPos = 0;
+var timerActive = false;
+
+// Update the timer every second
+var x = setInterval(function() {
+
+	// Bail out if timer is not active
+	if (! timerActive) return;
+
+	// Get current time
+	var now = new Date().getTime();
+
+	// Find the distance between now and the activated(start) time
+	var distance = now - timerActivated;
+
+	// Time calculations for hours, minutes and seconds
+	var hours = Math.floor((distance % 86400000) / 3600000);
+	var minutes = Math.floor((distance % 3600000) / 60000);
+	var seconds = Math.floor((distance % 60000) / 1000);
+	document.getElementById("time-display").innerHTML = String(hours).padStart(2,'0') + ":" + String(minutes).padStart(2,'0') + ":" + String(seconds).padStart(2,'0');
+
+	timerPos = Math.floor(100 * (now - timerActivated) / ( timerTarget - timerActivated));
+	if (timerPos > 100) timerPos = 0;
+	document.getElementById("vert-bar").style.left = timerPos + "%";
+
+	// Deactive timer when target is reached
+	if (now >= timerTarget) timerActive = false;
+
+}, 1000);
+
+function resetTimer()
+{
+	timerActive = false;
+	timerPos = 0;
+	var timerLength = document.getElementById("length").value;
+	var timerWarn =  document.getElementById("warn").value;
+	var timerAlert =  document.getElementById("alert").value;
+	timerActivated = new Date().getTime();
+	timerTarget = new Date(timerActivated + (60000 * timerLength)).getTime();
+
+	var pctGreen = Math.min(Math.floor(100 * (timerWarn / timerLength)), 100);
+	var pctYellow = Math.min(Math.floor(100 * (timerAlert / timerLength)), 100);
+	
+	document.getElementById("color-bar").style.backgroundImage = "linear-gradient(to right, lightgreen " + pctGreen + "%, lightyellow " + pctGreen + "% " + pctYellow + "%, pink " + pctYellow +"% 100%)";
+	
+	timerActive = true;
+}
+</script>
+
+</body>
+</html>
