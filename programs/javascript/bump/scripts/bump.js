@@ -452,8 +452,8 @@ BUMP = function()
 		document.getElementById("form-slider").style.width = (50 - width1) + "%";
 		var arrow = document.getElementById("toggle");
 		arrow.innerHTML = (width1 >= 10) ? "&#x25B6;" : "&#x25C0;";
-	}
-}
+	};
+};
 
 PACMAN = function()
 {
@@ -594,34 +594,7 @@ PACMAN = function()
 		}
 		return this.bumpMap;
 	};
- }
+};
 
 var PM = new PACMAN();
 var bump = new BUMP();
-
-/*
-		// calculate surface normal bump map LUT
-		// zero top line
-		// zero bottom line
-		var ybottom = 256 * 255;
-		for (var x = 0; x <= 255; x++)
-		{
-			bumpMap[(x*2)] = 0;
-			bumpMap[(x*2)+1] = 0;
-			bumpMap[ybottom+(x*2)] = 0;
-			bumpMap[ybottom+(x*2)+1] = 0;		
-		}
-
-		// assume surface normal with neighboring pixel heights
-		// add 128 to center into environment map
-		for (var y = 1; y <= 254; y++)
-		{
-			var row = y * 512;
-			for (var x = 1; x <= 254; x++)
-			{
-				var pos = row + (x * 2);
-				bumpMap[pos] = 128 + 2*(buffer[bxm1] - buffer[bxp1]);
-				bumpMap[pos + 1] = 128 + 2*(buffer[bym1] - buffer[byp1]);
-			}
-		}
-*/
