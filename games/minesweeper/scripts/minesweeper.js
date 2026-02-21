@@ -122,15 +122,21 @@ MINESWEEPER = function()
 		flagPanel.className = "FlagPanel";
 		statusPanel.appendChild(flagPanel);
 
+		var flags = levels[level].mines;
+		var m100 = Math.floor(flags / 100);
+		var flags = flags % 100;
+		var m010 = Math.floor(flags / 10);
+		flags = flags % 10;
+		var m001 = flags;
 		f100 = document.createElement('img');
 		f100.id="f100"
-		f100.src = "images/num/0.jpg";
+		f100.src = "images/num/" + m100 + ".jpg";
 		f010 = document.createElement('img');
 		f010.id = "f010";
-		f010.src = "images/num/1.jpg";
+		f010.src = "images/num/" + m010 + ".jpg";
 		f001 = document.createElement('img');
 		f001.id = "f001";
-		f001.src = "images/num/0.jpg";
+		f001.src = "images/num/" + m001 + ".jpg";
 		flagPanel.appendChild(f100);
 		flagPanel.appendChild(f010);
 		flagPanel.appendChild(f001);
@@ -138,6 +144,8 @@ MINESWEEPER = function()
 		var smileyPanel = document.createElement('div');
 		smileyPanel.className = "SmileyFace";
 		smileyBtn = document.createElement('button');
+		smileyBtn.title = "Click Smiley Face to start new game.";
+		smileyBtn.addEventListener('click', self.startNewGame);
 		smileyImg = document.createElement('img');
 		smileyImg.id = "smiley";
 		smileyImg.src = "images/face/smilehappy.jpg";
@@ -171,7 +179,7 @@ MINESWEEPER = function()
 	};
 	this.drawBoard = function()
 	{
-		console.log("GameState:" + gameState + ", Completed:" + this.isGameCompleted()+ ", FlagCount:" + flagCount + ", Visited:" + visitedCount + ", Neutral:" + levels[level].neutralCount);
+		//console.log("GameState:" + gameState + ", Completed:" + this.isGameCompleted()+ ", FlagCount:" + flagCount + ", Visited:" + visitedCount + ", Neutral:" + levels[level].neutralCount);
 		for (let y = 0; y < levels[level].rows; y++)
 		{
 			for (let x = 0; x < levels[level].cols; x++)
@@ -200,20 +208,53 @@ MINESWEEPER = function()
 				}
 			}
 		}
-	};
 
+		if (gameState == gameStates.Playing || gameState == gameStates.Ready)
+		{
+			setTimeout(() => {
+				self.drawSmileyFace("smilehappy"); // Wrap in arrow function
+			}, 300);
+		}
+	};
+	this.drawExposeMines = function(lastrow, lastcol)
+	{
+		for (let y = 0; y < levels[level].rows; y++)
+		{
+			for (let x = 0; x < levels[level].cols; x++)
+			{
+				if (this.isCellLive(board[y][x]))
+				{
+					id = y + "_" + x;
+					img = document.getElementById(id);
+
+					if (y == lastrow && x == lastcol)
+					{
+						img.src = "images/btn/mine_hit.jpg";
+					}
+					else
+					{
+						img.src = "images/btn/mine.jpg";
+					}
+				}
+				else if (this.isCellFlagged(board[y][x]))
+				{
+					id = y + "_" + x;
+					img = document.getElementById(id);
+					img.src = "images/btn/mine_miss.jpg";
+				}
+			}
+		}
+	};
 
 	this.cellRightClicked = function(event)
 	{
 		event.preventDefault();
 		var cell = event.target.value;
-		console.log("Right Button Was Clicked:" + event.target.value + ", type:" + event.type);
+		//console.log("Right Button Was Clicked:" + event.target.value + ", type:" + event.type);
 		var vals = cell.split("_");
 
-		if (gameState == gameStates.Ready)
-		{
-			gameState = gameStates.Playing;
-		}
+		if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
+		if (gameState == gameStates.Ready) gameState = gameStates.Playing;
 
 		self.toggleCellFlagged(vals[0],vals[1]);
 
@@ -221,10 +262,12 @@ MINESWEEPER = function()
 		if (gameState == gameStates.Playing && self.isGameCompleted())
 		{
 			gameState = gameStates.GameOverWin;
+			self.drawSmileyFace("smilewin");
 		}
 
 		self.drawBoard();
-		console.log(board);
+		self.drawFlagCounter();
+		//console.log(board);
 		return false;
 	};
 
@@ -232,13 +275,11 @@ MINESWEEPER = function()
 	{
 		event.preventDefault();
 		var cell = event.target.value;
-		console.log("Left Button Was Clicked:" + event.target.value + ", type:" + event.type);
+		//console.log("Left Button Was Clicked:" + event.target.value + ", type:" + event.type);
 		var vals = cell.split("_");
 	
-		if (gameState == gameStates.Ready)
-		{
-			gameState = gameStates.Playing;
-		}
+		if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
+		if (gameState == gameStates.Ready) gameState = gameStates.Playing;
 
 		if (self.isCellFlagged(board[vals[0]][vals[1]]))
 		{
@@ -246,14 +287,17 @@ MINESWEEPER = function()
 		}
 		else if (self.getCellNeighborsCount(board[vals[0]][vals[1]]) > 0)
 		{
+			self.drawSmileyFace("smilescared");
 			self.setCellVisited(vals[0],vals[1]);
 			if (self.isCellLive(board[vals[0]][vals[1]]))
 			{
 				gameState = gameStates.GameOverLose;
+				self.drawSmileyFace("smilelose");
 			}
 		}
 		else
 		{
+			self.drawSmileyFace("smilescared");
 			self.floodFillBFS(vals[0],vals[1]);
 		}
 
@@ -261,10 +305,14 @@ MINESWEEPER = function()
 		if (gameState == gameStates.Playing && self.isGameCompleted())
 		{
 			gameState = gameStates.GameOverWin;
+			self.drawSmileyFace("smilewin");
 		}
-
 		self.drawBoard();
-		console.log(board);
+		if (gameState == gameStates.GameOverLose)
+		{
+			self.drawExposeMines(vals[0],vals[1]);
+		}
+		//console.log(board);
 		return false;
 	};
 	this.isCellFlagged = function(cellValue)
@@ -394,13 +442,47 @@ MINESWEEPER = function()
 			}
 		}
 	};
+	this.drawSmileyFace = function(face)
+	{
+		var smileyImg1 = document.getElementById('smiley');
+		smileyImg1.src = "images/face/" + face + ".jpg";
+	};
+	this.drawFlagCounter = function()
+	{
+		var flags = levels[level].mines - flagCount;
+		var m100 = Math.floor(flags / 100);
+		var flags = flags % 100;
+		var m010 = Math.floor(flags / 10);
+		flags = flags % 10;
+		var m001 = flags;
+		f100 = document.getElementById('f100');
+		f010 = document.getElementById('f010');
+		f001 = document.getElementById('f001');
+		f100.src = "images/num/" + m100 + ".jpg";
+		f010.src = "images/num/" + m010 + ".jpg";
+		f001.src = "images/num/" + m001 + ".jpg";
+	};
+
+
+	this.startNewGame =function()
+	{
+		visitedCount = 0;
+		flagCount = 0;
+		gameState = 0;
+		board = structuredClone(boards[level]);
+		self.createLiveMines();
+		//console.log(board);
+		self.drawBoard();
+		self.drawFlagCounter();
+		self.drawSmileyFace("smilehappy");
+	};
 
 	this.init = function()
 	{
-		level = 2;
-		board = boards[level];
+		level = 0
+		board = structuredClone(boards[level]);
 		this.createLiveMines();
-		console.log(board);
+		//console.log(board);
 		this.initGamePanel();
 		gameState = gameStates.Ready;
 	};
