@@ -5,6 +5,8 @@ MINESWEEPER = function()
 	visitedCount = 0;
 	flagCount = 0;
 	gameState = 0;
+	toggleFlag = false;
+	seconds = 0;
 	levels =
 	[
 		{rows: 10, cols: 10, mines: 10, cellCount: 100, neutralCount: 90},
@@ -170,12 +172,57 @@ MINESWEEPER = function()
 		timePanel.appendChild(t010);
 		timePanel.appendChild(t001);
 
-
-
-
 		this.initBoard();
-		
 
+		var optionPanel = document.createElement('div');
+		optionPanel.className = "StatusPanel row";
+		optionPanel.style.width = (levels[level].rows * 31) + "px";
+		gamePanel.appendChild(optionPanel);
+
+		var levelSelect = document.createElement('select');
+		levelSelect.id = "selectLevel";
+		levelSelect.addEventListener('change', self.setLevel);
+		opt10 = document.createElement('option');
+		opt10.setAttribute("value", "0");
+		opt10.text = "10x10";
+		opt15 = document.createElement('option');
+		opt15.setAttribute("value", "1");
+		opt15.text = "15x15";
+		opt20 = document.createElement('option');
+		opt20.setAttribute("value", "2");
+		opt20.text = "20x20";
+
+		if (level == 0)
+		{
+			opt10.selected = true;
+			opt10.defaultSelected = true;
+		} else if (level == 1)
+		{
+			opt15.selected = true;
+			opt15.defaultSelected = true;
+		}
+		else
+		{
+			opt20.selected = true;
+			opt20.defaultSelected = true;
+		}
+		
+		levelSelect.appendChild(opt10);
+		levelSelect.appendChild(opt15);
+		levelSelect.appendChild(opt20);
+		optionPanel.appendChild(levelSelect);
+
+		var flagTogglePanel = document.createElement('div');
+		flagTogglePanel.className = "FlagToggle";
+		flagToggleBtn = document.createElement('button');
+		flagToggleBtn.title = "Toggle flag placement for touch devices or use mouse right click.";
+		flagToggleBtn.addEventListener('click', self.toggleFlagClicked);
+		flagToggleImg = document.createElement('img');
+		flagToggleImg.id = "flagToggle";
+		flagToggleImg.src = "images/toggle/flagoff.jpg";
+		flagTogglePanel.appendChild(flagToggleBtn);
+		flagToggleBtn.appendChild(flagToggleImg);
+		optionPanel.appendChild(flagTogglePanel);
 	};
 	this.drawBoard = function()
 	{
@@ -245,7 +292,20 @@ MINESWEEPER = function()
 			}
 		}
 	};
-
+	this.toggleFlagClicked = function(event)
+	{
+		event.preventDefault();
+		toggleFlag = !toggleFlag;
+		var toggleFlagImg = document.getElementById('flagToggle');
+		if (toggleFlag)
+		{
+			toggleFlagImg.src = "images/toggle/flagon.jpg";
+		}
+		else
+		{
+			toggleFlagImg.src = "images/toggle/flagoff.jpg";
+		}
+	};
 	this.cellRightClicked = function(event)
 	{
 		event.preventDefault();
@@ -274,46 +334,54 @@ MINESWEEPER = function()
 	this.cellLeftClicked = function(event)
 	{
 		event.preventDefault();
-		var cell = event.target.value;
-		//console.log("Left Button Was Clicked:" + event.target.value + ", type:" + event.type);
-		var vals = cell.split("_");
-	
-		if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
-		if (gameState == gameStates.Ready) gameState = gameStates.Playing;
-
-		if (self.isCellFlagged(board[vals[0]][vals[1]]))
+		// Need a toggle so touch devices can place flags
+		if (toggleFlag)
 		{
-			return;
-		}
-		else if (self.getCellNeighborsCount(board[vals[0]][vals[1]]) > 0)
-		{
-			self.drawSmileyFace("smilescared");
-			self.setCellVisited(vals[0],vals[1]);
-			if (self.isCellLive(board[vals[0]][vals[1]]))
-			{
-				gameState = gameStates.GameOverLose;
-				self.drawSmileyFace("smilelose");
-			}
+			self.cellRightClicked(event);
 		}
 		else
 		{
-			self.drawSmileyFace("smilescared");
-			self.floodFillBFS(vals[0],vals[1]);
-		}
+			var cell = event.target.value;
+			//console.log("Left Button Was Clicked:" + event.target.value + ", type:" + event.type);
+			var vals = cell.split("_");
+		
+			if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
+			if (gameState == gameStates.Ready) gameState = gameStates.Playing;
 
-		// Check game completed - Board cleared
-		if (gameState == gameStates.Playing && self.isGameCompleted())
-		{
-			gameState = gameStates.GameOverWin;
-			self.drawSmileyFace("smilewin");
+			if (self.isCellFlagged(board[vals[0]][vals[1]]))
+			{
+				return;
+			}
+			else if (self.getCellNeighborsCount(board[vals[0]][vals[1]]) > 0)
+			{
+				self.drawSmileyFace("smilescared");
+				self.setCellVisited(vals[0],vals[1]);
+				if (self.isCellLive(board[vals[0]][vals[1]]))
+				{
+					gameState = gameStates.GameOverLose;
+					self.drawSmileyFace("smilelose");
+				}
+			}
+			else
+			{
+				self.drawSmileyFace("smilescared");
+				self.floodFillBFS(vals[0],vals[1]);
+			}
+
+			// Check game completed - Board cleared
+			if (gameState == gameStates.Playing && self.isGameCompleted())
+			{
+				gameState = gameStates.GameOverWin;
+				self.drawSmileyFace("smilewin");
+			}
+			self.drawBoard();
+			if (gameState == gameStates.GameOverLose)
+			{
+				self.drawExposeMines(vals[0],vals[1]);
+			}
+			//console.log(board);
+			return false;
 		}
-		self.drawBoard();
-		if (gameState == gameStates.GameOverLose)
-		{
-			self.drawExposeMines(vals[0],vals[1]);
-		}
-		//console.log(board);
-		return false;
 	};
 	this.isCellFlagged = function(cellValue)
 	{
@@ -375,7 +443,6 @@ MINESWEEPER = function()
 
 		// Direction vectors for traversing 8 directions
 		const dir = [[1, 0], [-1, 0], [0, 1], [0, -1], [-1,-1], [-1, 1], [1, 1], [1, -1]];
-		//const dir = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
 		const q = [];
 		q.push([col, row]);
@@ -408,6 +475,7 @@ MINESWEEPER = function()
 					!this.isCellVisited(board[ny][nx]) &&
 					!this.isCellFlagged(board[ny][nx]))
 					{
+						// Expose cells with neighbors so numbers are visible
 						this.setCellVisited(ny, nx);
 					}
 			}
@@ -463,28 +531,86 @@ MINESWEEPER = function()
 		f001.src = "images/num/" + m001 + ".jpg";
 	};
 
-
-	this.startNewGame =function()
+	this.setLevel = function(event)
 	{
-		visitedCount = 0;
-		flagCount = 0;
-		gameState = 0;
+		event.preventDefault();
+		var gp = document.getElementById('GamePanel');
+		gp.remove();
+		level = Number(event.target.value);
+		self.init();
+	};
+	this.startNewGame = function()
+	{
 		board = structuredClone(boards[level]);
 		self.createLiveMines();
-		//console.log(board);
 		self.drawBoard();
 		self.drawFlagCounter();
 		self.drawSmileyFace("smilehappy");
+		gameState = gameStates.Ready;
+		visitedCount = 0;
+		flagCount = 0;
+		seconds = 0;
+		toggleFlag = false;
+		var toggleFlagImg = document.getElementById('flagToggle');
+		toggleFlagImg.src = "images/toggle/flagoff.jpg";
 	};
 
+	this.updateTimer = function(event)
+	{
+		if ((gameState == gameStates.Playing) || (gameState == gameStates.Ready))
+		{
+			if (gameState == gameStates.Ready)
+			{
+				seconds = 0;
+			}
+			else
+			{
+				seconds++;
+			}
+
+			var time = seconds;
+			
+			if (time > 999)
+			{
+				s100 = 9;
+				s010 = 9;
+				s001 = 9;
+				gameState = gameStates.GameOverLose;
+			}
+			
+			var s100 = Math.floor(time / 100);
+			time = time % 100;
+			var s010 = Math.floor(time / 10);
+			time = time % 10;
+			var s001 = time;
+
+			var t100 = document.getElementById('t100');
+			var t010 = document.getElementById('t010');
+			var t001 = document.getElementById('t001');
+
+			t100.src = "images/num/" + s100 + ".jpg";
+			t010.src = "images/num/" + s010 + ".jpg";
+			t001.src = "images/num/" + s001 + ".jpg";
+		}
+	};
 	this.init = function()
 	{
-		level = 0
 		board = structuredClone(boards[level]);
 		this.createLiveMines();
-		//console.log(board);
 		this.initGamePanel();
 		gameState = gameStates.Ready;
+		visitedCount = 0;
+		flagCount = 0;
+		gameState = 0;
+		seconds = 0;
+		toggleFlag = false;
+		var toggleFlagImg = document.getElementById('flagToggle');
+		toggleFlagImg.src = "images/toggle/flagoff.jpg";
+		var timerIntervalId;
+		if (typeof timerInvalidId === "undefined")
+		{
+			timerInvalidId = setInterval(self.updateTimer, 1000);
+		}
 	};
 };
 var SWEEP = new MINESWEEPER();

@@ -37,6 +37,20 @@
     padding: 0px;
 }
 
+    .StatusPanel > select {
+        margin: 0px;
+        padding: 0px;
+        width: 100px;
+        height: 40px;
+		border-color: lightgray;
+		border-style: inset;
+		border-width: 4px;
+		position: absolute;
+		top: 15px;
+		left: 10px;
+		background-color: lightgray;
+    }
+
 .row {
     height: 70px;
     width: 100%;
@@ -92,7 +106,7 @@
     border-style: outset;
     border-width: 4px;
     position: absolute;
-    top: 14px;
+    top: 12px;
     left: 50%;
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -107,6 +121,31 @@
     }
 
     .SmileyFace > img {
+        width: 34px;
+        height: 34px;
+    }
+
+.FlagToggle {
+    margin: 0px;
+    padding: 2px;
+    font-size: 0px;
+    display: inline-block;
+    border-style: outset;
+    border-width: 4px;
+    position: absolute;
+    top: 12px;
+    right: 10px;
+}
+
+    .FlagToggle > button {
+        margin: 0px;
+        padding: 0px;
+        width: 34px;
+        height: 34px;
+        border: none;
+    }
+
+    .FlagToggle > img {
         width: 34px;
         height: 34px;
     }
