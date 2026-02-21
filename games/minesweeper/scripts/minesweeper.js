@@ -613,6 +613,5 @@ MINESWEEPER = function()
 		}
 	};
 };
-var SWEEP = new MINESWEEPER();
-SWEEP.init();
+
 
