@@ -295,6 +295,7 @@ MINESWEEPER = function()
 	this.toggleFlagClicked = function(event)
 	{
 		event.preventDefault();
+		FX.play(SFX_FLAGSWITCH);
 		toggleFlag = !toggleFlag;
 		var toggleFlagImg = document.getElementById('flagToggle');
 		if (toggleFlag)
@@ -315,7 +316,9 @@ MINESWEEPER = function()
 
 		if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
 		if (gameState == gameStates.Ready) gameState = gameStates.Playing;
+		if (self.isCellVisited(board[vals[0]][vals[1]])) return;
 
+		FX.play(SFX_CELLCLICK);
 		self.toggleCellFlagged(vals[0],vals[1]);
 
 		// Check game completed - Board cleared
@@ -348,12 +351,13 @@ MINESWEEPER = function()
 			if (!(gameState == gameStates.Playing || gameState == gameStates.Ready)) return;
 			if (gameState == gameStates.Ready) gameState = gameStates.Playing;
 
-			if (self.isCellFlagged(board[vals[0]][vals[1]]))
+			if ((self.isCellFlagged(board[vals[0]][vals[1]])) || (self.isCellVisited(board[vals[0]][vals[1]])))
 			{
 				return;
 			}
 			else if (self.getCellNeighborsCount(board[vals[0]][vals[1]]) > 0)
 			{
+				FX.play(SFX_CELLCLICK);
 				self.drawSmileyFace("smilescared");
 				self.setCellVisited(vals[0],vals[1]);
 				if (self.isCellLive(board[vals[0]][vals[1]]))
@@ -364,6 +368,7 @@ MINESWEEPER = function()
 			}
 			else
 			{
+				FX.play(SFX_CELLCLICK);
 				self.drawSmileyFace("smilescared");
 				self.floodFillBFS(vals[0],vals[1]);
 			}
@@ -512,6 +517,9 @@ MINESWEEPER = function()
 	};
 	this.drawSmileyFace = function(face)
 	{
+		if (face == "smilewin") FX.play(SFX_GAMEWIN);
+		else if (face == "smilelose") FX.play(SFX_GAMELOSE);
+
 		var smileyImg1 = document.getElementById('smiley');
 		smileyImg1.src = "images/face/" + face + ".jpg";
 	};
@@ -541,6 +549,7 @@ MINESWEEPER = function()
 	};
 	this.startNewGame = function()
 	{
+		FX.stopAll();
 		board = structuredClone(boards[level]);
 		self.createLiveMines();
 		self.drawBoard();
@@ -595,6 +604,7 @@ MINESWEEPER = function()
 	};
 	this.init = function()
 	{
+		FX.stopAll();
 		board = structuredClone(boards[level]);
 		this.createLiveMines();
 		this.initGamePanel();
@@ -612,6 +622,167 @@ MINESWEEPER = function()
 			timerInvalidId = setInterval(self.updateTimer, 1000);
 		}
 	};
+	
+// GAME SOUND EFFECTS
+var SFX_CELLCLICK  = 0;
+var SFX_FLAGSWITCH = 1;
+var SFX_GAMEWIN    = 2;
+var SFX_GAMELOSE   = 3;
+var SFX_NOSOUND    = 4;
+
+
+PlayFX = function()
+{
+	var self = this;
+
+	this.cell_click  = false;
+	this.flag_switch = false;
+	this.game_win    = false;
+	this.game_lose   = false;
+	this.soundFX   = [];
+	this.pausedFX  = [];
+
+	this.init = function()
+	{
+		this.soundFX[SFX_CELLCLICK]  = new Howl({ src: ['audio/cell_click.mp3'], loop:false, volume: 1.0, onend: function(){self.stop(SFX_CELLCLICK)} });
+		this.soundFX[SFX_FLAGSWITCH] = new Howl({ src: ['audio/flag_switch.mp3'], loop:false, volume: 1.0, onend: function(){self.stop(SFX_FLAGSWITCH)} });
+		this.soundFX[SFX_GAMEWIN]    = new Howl({ src: ['audio/game_win.mp3'], loop:false, volume: 1.0, onend: function(){self.stop(SFX_GAMEWIN)} });
+		this.soundFX[SFX_GAMELOSE]   = new Howl({ src: ['audio/game_lose.mp3'], loop:false, volume: 1.0, onend: function(){self.stop(SFX_GAMELOSE)} });
+
+		for (let i = 0; i < this.soundFX.length; i++)
+		{
+			this.pausedFX[i] = false;
+		}
+	};
+
+	this.play = function(what)
+	{
+		this.soundFX[what].play();
+	};
+
+	this.pauseAll = function()
+	{
+		for (let i = 0; i < this.soundFX.length; i++)
+		{
+			if (this.soundFX[i].playing())
+			{
+				this.soundFX[i].pause();
+				this.pausedFX[i] = true;
+			}
+		}
+	};
+	
+	this.resumeAll = function()
+	{
+		for (let i = 0; i < this.soundFX.length; i++)
+		{
+			if (this.pausedFX[i])
+			{
+				this.play(i);
+				this.pausedFX[i] = false;
+			}
+		}
+	};
+
+	this.stopAll = function()
+	{
+		for (let i = 0; i < this.soundFX.length; i++)
+		{
+			if (this.soundFX[i].playing())
+			{
+				this.soundFX[i].stop();
+				this.pausedFX[i] = false;
+			}
+		}
+	};
+
+	this.start = function(what)
+	{
+		switch (what)
+		{
+			case SFX_NOSOUND:
+			{
+				this.pauseAll();
+				break;
+			}
+			case SFX_CELLCLICK:
+			{
+				if (! this.cell_click)
+				{
+					this.cell_click = true;
+					this.play(SFX_CELLCLICK);
+				}
+				break;
+			}
+			case SFX_FLAGSWITCH:
+			{
+				if (! this.flag_switch)
+				{
+					this.flag_switch = true;
+					this.play(SFX_FLAGSWITCH);
+				}
+				break;
+			}
+			case SFX_GAMEWIN:
+			{
+				if (! this.game_win)
+				{
+					this.game_win = true;
+					this.play(SFX_GAMEWIN);
+				}
+				break;
+			}
+			case SFX_GAMELOSE:
+			{
+				if (! this.game_lose)
+				{
+					this.game_lose = true;
+					this.play(SFX_GAMELOSE);
+				}
+				break;
+			}
+		}
+	};
+
+	this.stop = function(n)
+	{
+		switch (n)
+		{
+			case SFX_CELLCLICK:  {this.cell_click  = false; break;}
+			case SFX_FLAGSWITCH: {this.flag_switch = false; break;}
+			case SFX_GAMEWIN:    {this.game_win    = false; break;}
+			case SFX_GAMELOSE:   {this.game_lose   = false; break;}
+		}
+	};
+
+	this.init();
+};
+FX = new PlayFX();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 };
 
 
