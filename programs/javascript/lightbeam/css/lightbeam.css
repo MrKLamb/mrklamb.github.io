@@ -1,0 +1,78 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: white;
+	margin: 0px;
+	padding: 0px;
+}
+fieldset {
+	border-radius: 5px;
+	padding: 5px;
+	border-style: groove;
+	border-width: 3px;
+}
+.form-slider {
+	height: 50%;
+	width: 0;
+	position: fixed;
+	z-index: 5;
+	top: 0;
+	left: 0;
+	background-color: rgb(64,64,64);
+	background-color: rgba(64,64,64, 0.9);
+	overflow-x: hidden;
+	transition: 0.5s;
+	border-radius: 5px;
+	min-height:420px;
+}
+#toggle {
+	z-index: 10;
+	color: gray;
+	position: relative;
+	font-size:40px;
+	cursor:pointer;
+}
+.form {
+	border: 1px solid black;
+	background-color: #E5E4E2;
+	margin-top: 10px;
+	padding: 2px;
+	text-align: center;
+	font-size: 1.125em;
+	position: relative;
+	border-radius: 5px;
+	margin: auto;
+	width: 70%;
+	min-width: 256px;
+	top: 10%;
+
+ }
+ canvas {
+	width: 256px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.responsive-canvas {
+	width: 99%; /* Stretches to fill the container's width */
+	height: auto; /* Maintains aspect ratio */
+	border: 1px solid black;
+
+	/* This section expands canvas to fill entire window */
+	background-color: #000000;
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 99%;
+	width: 99%;
+}
+.container {
+	width: 50%;
+	height: auto;
+	min-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+}
