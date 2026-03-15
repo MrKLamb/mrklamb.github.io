@@ -11,7 +11,7 @@ fieldset {
 	border-width: 3px;
 }
 .form-slider {
-	height: 50%;
+	height: 60%;
 	width: 0;
 	position: fixed;
 	z-index: 5;
