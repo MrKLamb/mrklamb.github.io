@@ -550,15 +550,15 @@ MINESWEEPER = function()
 	this.startNewGame = function()
 	{
 		FX.stopAll();
+		visitedCount = 0;
+		flagCount = 0;
+		seconds = 0;
 		board = structuredClone(boards[level]);
 		self.createLiveMines();
 		self.drawBoard();
 		self.drawFlagCounter();
 		self.drawSmileyFace("smilehappy");
 		gameState = gameStates.Ready;
-		visitedCount = 0;
-		flagCount = 0;
-		seconds = 0;
 		toggleFlag = false;
 		var toggleFlagImg = document.getElementById('flagToggle');
 		toggleFlagImg.src = "images/toggle/flagoff.jpg";
